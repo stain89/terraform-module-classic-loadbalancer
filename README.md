@@ -8,6 +8,7 @@ module "my-elb" {
   vpc_id      = "vpc-a27e94ea"
   name        = "test"
   environment = "dev"
+  internal    = false
   aws_region  = "eu-central-1"
   security_groups_ids = ["sg-0aab0a0045e7rbd1e"]
   subnet_type         = "public"
