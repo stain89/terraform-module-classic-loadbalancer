@@ -7,26 +7,27 @@ provider "aws" {
 data "aws_subnet_ids" "subnets" {
   vpc_id = var.vpc_id
 
-  tags {
+  tags = {
     Zone = var.subnet_type
   }
 
-  depends_on = [
-  null_resource.force_dependencies]
 }
 
 # Classic Load Balancer
 resource "aws_elb" "elb" {
-  name = "${var.name}-clb"
-  subnets = [
-  data.aws_subnet_ids.subnets.ids]
-  internal = var.internal
-  security_groups = [
-  var.security_groups_ids]
+  name                        = "${var.name}-clb"
+  subnets                     = data.aws_subnet_ids.subnets.ids
+  internal                    = var.internal
+  security_groups             = var.security_groups_ids
   cross_zone_load_balancing   = var.cross_zone_load_balancing
   idle_timeout                = var.idle_timeout
   connection_draining         = var.connection_draining
   connection_draining_timeout = var.connection_draining_timeout
+
+  tags = {
+    Name        = "${var.name}-clb"
+    Environment = var.environment
+  }
 
   # Setting Listeners for ELB
   dynamic "listener" {
