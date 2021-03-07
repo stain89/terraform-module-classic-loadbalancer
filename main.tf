@@ -12,7 +12,7 @@ data "aws_subnet_ids" "subnets" {
   }
 
   depends_on = [
-  "null_resource.force_dependencies"]
+  null_resource.force_dependencies]
 }
 
 # Classic Load Balancer
