@@ -4,7 +4,6 @@
 
 ```
 module "my-elb" {
- # version = "~>12"
   source      = "git@github.com:stain89/terraform-module-classic-loadbalancer.git"
   vpc_id      = "vpc-a27e94ea"
   name        = "test"
